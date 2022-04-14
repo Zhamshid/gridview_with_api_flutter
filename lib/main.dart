@@ -29,7 +29,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  gridView(AsyncSnapshot<List<Names>> snapshot) {
+  gridView(AsyncSnapshot<List<Data>> snapshot) {
     return GridView.count(
       crossAxisCount: 2,
       childAspectRatio: 1,
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  gotoDetailpage(BuildContext context, Names names) {}
+  gotoDetailpage(BuildContext context, Data names) {}
 
   circularProgress() {
     return const Center(
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Flexible(
-            child: FutureBuilder<List<Names>>(
+            child: FutureBuilder<List<Data>>(
               future: NetworkRequest.fetchNames(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {

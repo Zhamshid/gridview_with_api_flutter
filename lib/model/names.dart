@@ -1,44 +1,104 @@
+/// code : 200
+/// status : "OK"
+/// data : [{"name":"الرَّحْمَنُ","transliteration":"Ar Rahmaan","number":1,"en":{"meaning":"The Beneficent"}}]
+
 class Names {
-  String? name;
-  String? transliteration;
-  int? number;
-  En? en;
+  Names({this.code, this.status, this.data});
 
-  Names({this.name, this.transliteration, this.number, this.en});
+  Names.fromJson(dynamic json) {
+    code = json['code'];
+    status = json['status'];
+    if (json['data'] != null) {
+      data = [];
+      json['data'].forEach((v) {
+        data?.add(Data.fromJson(v));
+      });
+    }
+  }
+  int? code;
+  String? status;
+  List<Data>? data;
+  Names copyWith({
+    int? code,
+    String? status,
+    List<Data>? data,
+  }) =>
+      Names(
+        code: code ?? this.code,
+        status: status ?? this.status,
+        data: data ?? this.data,
+      );
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['code'] = code;
+    map['status'] = status;
+    if (data != null) {
+      map['data'] = data?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+}
 
-  Names.fromJson(Map<String, dynamic> json) {
+/// name : "الرَّحْمَنُ"
+/// transliteration : "Ar Rahmaan"
+/// number : 1
+/// en : {"meaning":"The Beneficent"}
+
+class Data {
+  Data({this.name, this.transliteration, this.number, this.en});
+
+  Data.fromJson(dynamic json) {
     name = json['name'];
     transliteration = json['transliteration'];
     number = json['number'];
     en = json['en'] != null ? En.fromJson(json['en']) : null;
   }
-
-  List<dynamic> toJson() {
-    final Map<String, dynamic> map = <String, dynamic>{};
-    List<dynamic> data = map['data'];
-    data[0]['name'] = name;
-    data[0]['transliteration'] = transliteration;
-    data[0]['number'] = number;
+  String? name;
+  String? transliteration;
+  int? number;
+  En? en;
+  Data copyWith({
+    String? name,
+    String? transliteration,
+    int? number,
+    En? en,
+  }) =>
+      Data(
+        name: name ?? this.name,
+        transliteration: transliteration ?? this.transliteration,
+        number: number ?? this.number,
+        en: en ?? this.en,
+      );
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['name'] = name;
+    map['transliteration'] = transliteration;
+    map['number'] = number;
     if (en != null) {
-      data[0]['en'] = en!.toJson();
+      map['en'] = en?.toJson();
     }
-    return data;
+    return map;
   }
 }
 
-class En {
-  String? meaning;
+/// meaning : "The Beneficent"
 
+class En {
   En({this.meaning});
 
-  En.fromJson(Map<String, dynamic> json) {
+  En.fromJson(dynamic json) {
     meaning = json['meaning'];
   }
-
-  List<dynamic> toJson() {
-    final Map<String, dynamic> map = <String, dynamic>{};
-    List<dynamic> data = map['data'];
-    data[0]['en']['meaning'] = meaning;
-    return data;
+  String? meaning;
+  En copyWith({
+    String? meaning,
+  }) =>
+      En(
+        meaning: meaning ?? this.meaning,
+      );
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['meaning'] = meaning;
+    return map;
   }
 }

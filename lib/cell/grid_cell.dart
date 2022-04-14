@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gridview_test_with_api/model/names.dart';
 
 class NameCell extends StatelessWidget {
-  const NameCell({Key? key, this.names,}) : super(key: key);
+  const NameCell({
+    Key? key,
+    this.names,
+  }) : super(key: key);
 
-  final Names? names;
+  final Data? names;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,10 @@ class NameCell extends StatelessWidget {
                   maxLines: 1,
                   softWrap: true,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
